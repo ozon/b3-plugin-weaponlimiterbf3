@@ -12,13 +12,20 @@
 	</settings>
 
 	<settings name="settings">
-        <set name="autostart">no</set> <!-- if set no, you must enable the WeaponLimiter with ingame command -->
+        <set name="autostart">no</set> <!-- if set to no, you must enable the WeaponLimiter with ingame command -->
 		<set name="kill_killer">1</set>
 	</settings>
 
+    <!-- Weapon and Map configuration -->
     <settings name="MP_Subway"> <!-- identify forbidden weapons per mapname  -->
 		<set name="weapons">SMAW, M320, RPG-7</set> <!-- comma delimited list of forbidden weapons -->
         <set name="gametype">SquadDeathMatch0, ConquestSmall0</set> <!-- comma delimited list of gametypes (TODO: implement "all" for every) -->
 	</settings>
+    
+    <!-- sample add second map configuration 
+    <settings name="MP_011">
+		<set name="weapons">SMAW, M320, RPG-7</set>
+        <set name="gametype">SquadDeathMatch0, ConquestSmall0</set>
+	</settings> -->
     
 </configuration>
