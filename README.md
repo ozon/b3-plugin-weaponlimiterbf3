@@ -4,8 +4,7 @@ Installation
 ------------
 * copy weaponlimiterbf3.py into b3/extplugins
 * copy conf/plugin_weaponlimiterbf3.xml into b3/extplugins/conf
-* add `<plugin name="teamspeakbf" config="@conf/extplugins/plugin_teamspeakbf.xml"/>` in you main b3 config file
-
+* add `<plugin name="weaponlimiterbf3" config="@conf/extplugins/plugin_weaponlimiterbf3.xml"/>` in you main b3 config file
 * modify plugin_weaponlimiterbf3.xml
 
 
