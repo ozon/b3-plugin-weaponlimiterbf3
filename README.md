@@ -21,5 +21,10 @@ Contributing
 2. Test it
 3. Visit [our Battlefield3 Server][1] ( This Plugin is on Metro Maps active )
 
+Thanks
+------
+* HarryGer1981 for testing in long nights
+* [courgette][2] and the b3 project for code samples
 
 [1] : http://battlelog.battlefield.com/bf3/de/servers/show/b5e4367c-4196-4691-bcc6-56ae0b2c0238/
+[2] : https://github.com/courgette
