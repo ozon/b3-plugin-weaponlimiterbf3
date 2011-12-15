@@ -65,11 +65,13 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 killer = event.client
                 weapon = event.data[1]
                 if weapon in self.forbidden_weapons:
-                    #cmd_warn(self, data=None, client=killer, cmd=None)
+                    self.debug('%s in pattern detected' % weapon)
+                    
                     _wmsg = '%s is forbidden!' % weapon
                     _kmsg = 'Use forbidden %s' % weapon
-    #               self.console.write(('admin.killPlayer', killer))
-#                   killer.message('Kill reason: %s' % _kmsg)
+
+                    self.console.write(('admin.killPlayer', killer.name))
+                    killer.message('Kill reason: %s' % _kmsg)
                     
                     self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
