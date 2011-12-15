@@ -1,0 +1,24 @@
+<configuration plugin="weaponlimiterbf3">
+
+	<settings name="commands">
+		<set name="weaponlimiter-wpl">60</set>
+		<set name="forbidden_weapons">0</set>
+	</settings>
+
+	<settings name="messages">
+        <set name="weaponlimiter_enabled">WeaponLimiter for that round activated! ^7Forbidden Weapons are:</set>
+        <set name="weaponlimiter_disabled">Weaponlimiter disabled! All Weapons allowed.</set>
+		<set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
+	</settings>
+
+	<settings name="settings">
+        <set name="autostart">no</set> <!-- if set no, you must enable the WeaponLimiter with ingame command -->
+		<set name="kill_killer">1</set>
+	</settings>
+
+    <settings name="MP_Subway"> <!-- identify forbidden weapons per mapname  -->
+		<set name="weapons">SMAW, M320, RPG-7</set> <!-- comma delimited list of forbidden weapons -->
+        <set name="gametype">SquadDeathMatch0, ConquestSmall0</set> <!-- comma delimited list of gametypes (TODO: implement "all" for every) -->
+	</settings>
+    
+</configuration>
