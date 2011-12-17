@@ -155,8 +155,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 if __name__ == '__main__':
 
     from b3.fake import fakeConsole, superadmin, joe
-    game = Game(fakeConsole, 'fakegamename')
-
+    import time
     from b3.config import XmlConfigParser
     mcfg = XmlConfigParser()
     mcfg.readfp('/home/ozon/bf3_stuff/b3plugingit/b3-plugin-weaponlimiterbf3/extplugins/conf/plugin_weaponlimiterbf3.xml')
@@ -177,7 +176,7 @@ if __name__ == '__main__':
     myplugin = Weaponlimiterbf3Plugin(fakeConsole, mcfg)
     myplugin.onStartup()
     time.sleep(2)
-    assert game.mapName == 'map3'
+
 
     #def testCommand():
     #    superadmin.connects(0)
