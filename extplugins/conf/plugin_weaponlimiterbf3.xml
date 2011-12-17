@@ -2,7 +2,6 @@
 
 	<settings name="commands">
 		<set name="weaponlimiter-wpl">60</set>
-		<set name="forbidden_weapons">0</set>
 	</settings>
 
 	<settings name="messages">
@@ -11,8 +10,7 @@
 		<set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
 	</settings>
 
-	<settings name="settings">
-        <set name="autostart">no</set> <!-- if set to no, you must enable the WeaponLimiter with ingame command -->
+	<settings name="punisher-settings">
 		<set name="kill_killer">1</set>
 	</settings>
 
