@@ -32,12 +32,9 @@ __author__ = 'ozon'
 
 class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _adminPlugin = None
-    #_poweradminbf3Plugin = None
-    
-    
+    _weapon_limiter_is_active = None
 
     def onLoadConfig(self):
-        self._weapon_limiter_is_active = self.config.getboolean('settings', 'autostart')
         self._weaponlimiter_disabled_msg = self.config.get('messages', 'weaponlimiter_disabled')
         self._weaponlimiter_enabled_msg = self.config.get('messages', 'weaponlimiter_enabled')
         self.cmd_weaponlimiter_wlist_text = self.config.get('messages', 'warn_message')
@@ -49,12 +46,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         if not self._adminPlugin:
             self.error('Could not find admin plugin')
             return False
-        
-        #self._poweradminbf3Plugin = self.console.getPlugin('poweradminbf3')
-
+        # register our command
         self._register_commands()
-        self._weapon_limiter_is_active = self.config.getboolean('settings', 'autostart')
-        
+        # disable WeaponLimiter per default
+        self._weapon_limiter_is_active = None
+        # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
         self.registerEvent(b3.events.EVT_GAME_ROUND_START)
 
@@ -87,7 +83,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 self._configure_weaponlimiter()
             except IndexError:
                 pass
-        
+
+    
+    # configure limiter per map
     def _configure_weaponlimiter(self):
         _current_map = self.console.game.mapName
         _current_gameType = self.console.game.gameType
