@@ -186,33 +186,11 @@ if __name__ == '__main__':
 
     from b3.fake import fakeConsole, superadmin, joe
     import time
-    from b3.config import XmlConfigParser
-    mcfg = XmlConfigParser()
-    mcfg.readfp('/home/ozon/bf3_stuff/b3plugingit/b3-plugin-weaponlimiterbf3/extplugins/conf/plugin_weaponlimiterbf3.xml')
-#    mcfg.setXml("""\
-#        <configuration plugin="weaponlimiterbf3">
-# 
-#            <settings name="commands">
-#                <set name="weaponlimiter">0</set>
-#            </settings>
-# 
-#            <settings name="otherstuff">
-#                <set name="helloworld_text">hello world :)</set>
-#            </settings>
-# 
-#        </configuration>
-#    """)
 
-    myplugin = Weaponlimiterbf3Plugin(fakeConsole, mcfg)
+    myplugin = Weaponlimiterbf3Plugin(fakeConsole, '@b3/extplugins/conf/plugin_weaponlimiterbf3.xml')
     myplugin.onStartup()
     time.sleep(2)
 
 
-    #def testCommand():
-    #    superadmin.connects(0)
-    #    superadmin.says('!weaponlimiter')
-
-#	testCommand()
     superadmin.connects(cid=0)
     superadmin.says('!weaponlimiter')
-
