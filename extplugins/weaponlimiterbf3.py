@@ -49,7 +49,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         # register our command
         self._register_commands()
         # disable WeaponLimiter per default
-        self._weapon_limiter_is_active = None
+        self._weapon_limiter_is_active = False
         # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
         self.registerEvent(b3.events.EVT_GAME_ROUND_START)
