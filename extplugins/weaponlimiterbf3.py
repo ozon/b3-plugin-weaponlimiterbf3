@@ -56,7 +56,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
 
     def onEvent(self, event):
-        if event.type == b3.events.EVT_CLIENT_KILL and  self._weapon_limiter_is_active:
+        if event.type == b3.events.EVT_CLIENT_KILL and self._weapon_limiter_is_active:
             try:
                 killer = event.client
                 weapon = event.data[1]
@@ -78,7 +78,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             except IndexError:
                 pass
 
-        if event.type == b3.events.EVT_GAME_ROUND_START:
+        if event.type == b3.events.EVT_GAME_ROUND_START and self._weapon_limiter_is_active:
             try:
                 self._configure_weaponlimiter()
             except IndexError:
