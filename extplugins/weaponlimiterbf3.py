@@ -34,10 +34,24 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _adminPlugin = None
     _weapon_limiter_is_active = None
 
+    # load punisher setting in a dict
+    # TODO: should test option and more generic
+    def load_punisherConfig(self):
+        punisher_settings = {}
+        for key in self.config.options('punisher-settings'):
+            punisher_settings[key] = self.config.getboolean('punisher-settings', key)
+        
+        return punisher_settings
+        
+    # load settings from config file (i think the b3 API should provide safer methods)
+    # wrong options break the code
     def onLoadConfig(self):
         self._weaponlimiter_disabled_msg = self.config.get('messages', 'weaponlimiter_disabled')
         self._weaponlimiter_enabled_msg = self.config.get('messages', 'weaponlimiter_enabled')
         self.cmd_weaponlimiter_wlist_text = self.config.get('messages', 'warn_message')
+        #loading punisher settings
+        self._punisher_settings = self.load_punisherConfig()
+        
 
 
     def onStartup(self):
@@ -53,6 +67,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
         self.registerEvent(b3.events.EVT_GAME_ROUND_START)
+        # load punisher settings
+        self._punisher_settings = self.load_punisherConfig()
+        
 
 
     def onEvent(self, event):
@@ -63,13 +80,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if weapon in self.forbidden_weapons:
                     self.debug('%s in pattern detected' % weapon)
                     
-                    _wmsg = '%s is forbidden!' % weapon
-                    _kmsg = 'Use forbidden %s' % weapon
-
-                    self.console.write(('admin.killPlayer', killer.name))
-                    killer.message('Kill reason: %s' % _kmsg)
-                    
-                    self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
+                    self._punish_player(self, event)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
                     ##no outout msg## killer.warn('1h', _wmsg, None, None, '')
                     #self._adminPlugin.warnClient(killer.id, '', True, False, _wmsg, 1)
@@ -97,7 +108,26 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self.forbidden_weapons = self._get_cfg_value_list(_current_map, 'weapons')
         else:
             self._disable_weaponlimiter()
+
+
+    # punish player
+    def _punish_player(self, event):
+        weapon = event.data[1]
+        killer = event.client
+        if self._punisher_settings['kill_player']:
+            _kmsg = 'Use forbidden %s' % weapon
+            self.console.write(('admin.killPlayer', killer.name))
+            # TODO: check if player live for kill
+            killer.message('Kill reason: %s' % _kmsg)
+        
+        if self._punisher_settings['warn_player']:
+            _wmsg = '%s is forbidden!' % weapon
+            self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
+        
+        if self._punisher_settings['kick_player']:
+            pass
             
+
     def _disable_weaponlimiter(self):
         self.forbidden_weapons = []
         if self._weapon_limiter_is_active:
