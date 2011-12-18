@@ -111,9 +111,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
 
     # punish player
-    def _punish_player(self, event):
-        weapon = event.data[1]
-        killer = event.client
+    def _punish_player(self, event, data=None, client=None):
+        weapon = data.data[1]
+        killer = data.client
         if self._punisher_settings['kill_player']:
             _kmsg = 'Use forbidden %s' % weapon
             self.console.write(('admin.killPlayer', killer.name))
