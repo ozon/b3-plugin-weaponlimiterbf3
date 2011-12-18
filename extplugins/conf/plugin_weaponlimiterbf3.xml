@@ -10,14 +10,17 @@
 		<set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
 	</settings>
 
+	<settings name="settings">
+	    <set name="whitelist_level">60</set> <!-- users in group level are whitelistet / irgnored by weaponlimiter -->
+	</settings>
 	<settings name="punisher-settings">
 		<set name="kill_player">yes</set> <!-- kill player (without scoring effects) -->
 		<set name="warn_player">yes</set> <!-- warn player with Warn system (player got kick after x warning) -->
 		
 		<!-- DONT ENABLE the follow settings on Ranked Servers -->
 		<set name="kick_player">no</set> <!-- kick player instant - all other punisher settings are ignored -->
-		
 	</settings>
+	
 
     <!-- Weapon and Map configuration -->
     <settings name="MP_Subway"> <!-- identify forbidden weapons per mapname  -->
