@@ -193,4 +193,8 @@ if __name__ == '__main__':
 
 
     superadmin.connects(cid=0)
+    superadmin.setvar('weaponlimiterbf3', 'test','blub')
+    print(dir(superadmin))
+    print(superadmin.var('weaponlimiterbf3','test'))
     superadmin.says('!weaponlimiter')
+
