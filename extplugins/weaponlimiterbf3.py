@@ -32,7 +32,7 @@ __author__ = 'ozon'
 
 class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _adminPlugin = None
-    _weapon_limiter_is_active = None
+    weapon_limiter_is_active = None
 
     # load punisher setting in a dict
     # TODO: should test option and more generic
@@ -64,7 +64,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         # register our command
         self.register_commands()
         # disable WeaponLimiter per default
-        self._weapon_limiter_is_active = False
+        self.weapon_limiter_is_active = False
         # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
         self.registerEvent(b3.events.EVT_GAME_ROUND_START)
@@ -75,7 +75,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def onEvent(self, event):
         """ Handle CLIENT_KILL and GAME_ROUND_START events """
-        if event.type == b3.events.EVT_CLIENT_KILL and self._weapon_limiter_is_active:
+        if event.type == b3.events.EVT_CLIENT_KILL and self.weapon_limiter_is_active:
             try:
                 killer = event.client
                 weapon = event.data[1]
@@ -91,7 +91,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             except IndexError:
                 pass
 
-        if event.type == b3.events.EVT_GAME_ROUND_START and self._weapon_limiter_is_active:
+        if event.type == b3.events.EVT_GAME_ROUND_START and self.weapon_limiter_is_active:
             try:
                 self.configure_weaponlimiter()
             except IndexError:
@@ -101,7 +101,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     # configure limiter per map
     def configure_weaponlimiter(self):
         """ Load weaponlimiter Configuration per map/gametype """
-        if self._weapon_limiter_is_active:
+        if self.weapon_limiter_is_active:
             _current_map = self.console.game.mapName
             _current_gameType = self.console.game.gameType
             self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
@@ -137,10 +137,10 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     def disable_weaponlimiter(self):
         """ Disable weaponlimiter activity """
         self.forbidden_weapons = []
-        if self._weapon_limiter_is_active:
+        if self.weapon_limiter_is_active:
             self.console.say(self._weaponlimiter_disabled_msg)
             
-        self._weapon_limiter_is_active = False
+        self.weapon_limiter_is_active = False
             
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
@@ -148,7 +148,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         if client:            
             if not data:
                 status_msg = ''
-                if self._weapon_limiter_is_active:
+                if self.weapon_limiter_is_active:
                     status_msg = 'WeaponLimiter is active!'
                 else:
                     status_msg = 'WeaponLimiter is disabled!'
@@ -157,7 +157,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if data not in ('on', 'off', 'pause'):
                     client.message("Invalid parameter. Expecting one of : 'on', 'off', 'pause'")
                 elif data == 'on':
-                    self._weapon_limiter_is_active = True
+                    self.weapon_limiter_is_active = True
                     self.configure_weaponlimiter()
                 elif data == 'off':
                     self.disable_weaponlimiter()
