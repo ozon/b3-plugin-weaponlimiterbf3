@@ -98,17 +98,18 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     
     # configure limiter per map
     def _configure_weaponlimiter(self):
-        _current_map = self.console.game.mapName
-        _current_gameType = self.console.game.gameType
-        self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
+        if self._weapon_limiter_is_active:
+            _current_map = self.console.game.mapName
+            _current_gameType = self.console.game.gameType
+            self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
             
-        if self.config.has_section(_current_map) and _current_gameType in self._get_cfg_value_list(_current_map, 'gametype'):
-            self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
-            self.console.say(self._weaponlimiter_enabled_msg)
-            self.forbidden_weapons = self._get_cfg_value_list(_current_map, 'weapons')
-        else:
-            self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
-            self._disable_weaponlimiter()
+            if self.config.has_section(_current_map) and _current_gameType in self._get_cfg_value_list(_current_map, 'gametype'):
+                self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
+                self.console.say(self._weaponlimiter_enabled_msg)
+                self.forbidden_weapons = self._get_cfg_value_list(_current_map, 'weapons')
+            else:
+                self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
+                self._disable_weaponlimiter()
 
 
     # punish player
@@ -150,8 +151,8 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if data not in ('on', 'off', 'pause'):
                     client.message("Invalid parameter. Expecting one of : 'on', 'off', 'pause'")
                 elif data == 'on':
-                    self._configure_weaponlimiter()
                     self._weapon_limiter_is_active = True
+                    self._configure_weaponlimiter()
                 elif data == 'off':
                     self._disable_weaponlimiter()
 
