@@ -161,13 +161,19 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                     self._configure_weaponlimiter()
                 elif data == 'off':
                     self._disable_weaponlimiter()
+                    
 
 
 
 ### helper functions ###
 
     def _get_cfg_value_list(self, cfg_section, cfg_setting):
-        """ Load configuration values """
+        """
+        Load values from plugin configuration section
+        @return: list from section values
+        @param cfg_section: section in config File
+        @param cfg_settings: value in cofigration section  
+        """
         return [x.strip() for x in self.config.get(cfg_section, cfg_setting).split(',')]
 
     def _getCmd(self, cmd):
