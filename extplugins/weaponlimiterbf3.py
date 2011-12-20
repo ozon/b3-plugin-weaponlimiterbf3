@@ -100,13 +100,14 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     def _configure_weaponlimiter(self):
         _current_map = self.console.game.mapName
         _current_gameType = self.console.game.gameType
-        self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType) )
+        self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
             
         if self.config.has_section(_current_map) and _current_gameType in self._get_cfg_value_list(_current_map, 'gametype'):
-            self.debug('Configuration found')
+            self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
             self.console.say(self._weaponlimiter_enabled_msg)
             self.forbidden_weapons = self._get_cfg_value_list(_current_map, 'weapons')
         else:
+            self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
             self._disable_weaponlimiter()
 
 
