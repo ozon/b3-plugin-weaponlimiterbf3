@@ -62,7 +62,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self.error('Could not find admin plugin')
             return False
         # register our command
-        self._register_commands()
+        self.register_commands()
         # disable WeaponLimiter per default
         self._weapon_limiter_is_active = False
         # register Events
@@ -82,7 +82,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if weapon in self.forbidden_weapons:
                     self.debug('%s in pattern detected' % weapon)
                     
-                    self._punish_player(self, event)
+                    self.punish_player(self, event)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
                     ##no outout msg## killer.warn('1h', _wmsg, None, None, '')
                     #self._adminPlugin.warnClient(killer.id, '', True, False, _wmsg, 1)
@@ -93,30 +93,30 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         if event.type == b3.events.EVT_GAME_ROUND_START and self._weapon_limiter_is_active:
             try:
-                self._configure_weaponlimiter()
+                self.configure_weaponlimiter()
             except IndexError:
                 pass
 
     
     # configure limiter per map
-    def _configure_weaponlimiter(self):
+    def configure_weaponlimiter(self):
         """ Load weaponlimiter Configuration per map/gametype """
         if self._weapon_limiter_is_active:
             _current_map = self.console.game.mapName
             _current_gameType = self.console.game.gameType
             self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
             
-            if self.config.has_section(_current_map) and _current_gameType in self._get_cfg_value_list(_current_map, 'gametype'):
+            if self.config.has_section(_current_map) and _current_gameType in self.get_cfg_value_list(_current_map, 'gametype'):
                 self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
                 self.console.say(self._weaponlimiter_enabled_msg)
-                self.forbidden_weapons = self._get_cfg_value_list(_current_map, 'weapons')
+                self.forbidden_weapons = self.get_cfg_value_list(_current_map, 'weapons')
             else:
                 self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
-                self._disable_weaponlimiter()
+                self.disable_weaponlimiter()
 
 
     # punish player
-    def _punish_player(self, event, data=None, client=None):
+    def punish_player(self, event, data=None, client=None):
         """ Punish player """
         weapon = data.data[1]
         killer = data.client
@@ -134,7 +134,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             pass
             
 
-    def _disable_weaponlimiter(self):
+    def disable_weaponlimiter(self):
         """ Disable weaponlimiter activity """
         self.forbidden_weapons = []
         if self._weapon_limiter_is_active:
@@ -158,16 +158,16 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                     client.message("Invalid parameter. Expecting one of : 'on', 'off', 'pause'")
                 elif data == 'on':
                     self._weapon_limiter_is_active = True
-                    self._configure_weaponlimiter()
+                    self.configure_weaponlimiter()
                 elif data == 'off':
-                    self._disable_weaponlimiter()
+                    self.disable_weaponlimiter()
                     
 
 
 
 ### helper functions ###
 
-    def _get_cfg_value_list(self, cfg_section, cfg_setting):
+    def get_cfg_value_list(self, cfg_section, cfg_setting):
         """
         Load values from plugin configuration section
         @return: list from section values
@@ -176,7 +176,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         """
         return [x.strip() for x in self.config.get(cfg_section, cfg_setting).split(',')]
 
-    def _getCmd(self, cmd):
+    def getCmd(self, cmd):
         cmd = 'cmd_%s' % cmd
         if hasattr(self, cmd):
             func = getattr(self, cmd)
@@ -184,7 +184,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     
         return None
  
-    def _register_commands(self):
+    def register_commands(self):
         if 'commands' in self.config.sections():
             for cmd in self.config.options('commands'):
                 level = self.config.get('commands', cmd)
@@ -193,7 +193,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if len(sp) == 2:
                     cmd, alias = sp
             
-                func = self._getCmd(cmd)
+                func = self.getCmd(cmd)
                 if func:
                     self._adminPlugin.registerCommand(self, cmd, level, func, alias)
 
