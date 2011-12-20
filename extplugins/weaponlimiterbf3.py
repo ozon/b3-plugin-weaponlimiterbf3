@@ -55,6 +55,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
 
     def onStartup(self):
+        """Initialize plugin settings"""
         # try to load admin plugin
         self._adminPlugin = self.console.getPlugin('admin')
         if not self._adminPlugin:
@@ -73,6 +74,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
 
     def onEvent(self, event):
+        """Handle CLIENT_KILL and GAME_ROUND_START events"""
         if event.type == b3.events.EVT_CLIENT_KILL and self._weapon_limiter_is_active:
             try:
                 killer = event.client
@@ -98,6 +100,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     
     # configure limiter per map
     def _configure_weaponlimiter(self):
+        """Load weaponlimiter Configuration per map/gametype"""
         if self._weapon_limiter_is_active:
             _current_map = self.console.game.mapName
             _current_gameType = self.console.game.gameType
@@ -114,6 +117,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     # punish player
     def _punish_player(self, event, data=None, client=None):
+        """Punish player"""
         weapon = data.data[1]
         killer = data.client
         if self._punisher_settings['kill_player']:
@@ -131,6 +135,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             
 
     def _disable_weaponlimiter(self):
+        """Disable weaponlimiter activity"""
         self.forbidden_weapons = []
         if self._weapon_limiter_is_active:
             self.console.say(self._weaponlimiter_disabled_msg)
@@ -139,6 +144,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
+        """Handle Plugin commands"""
         if client:            
             if not data:
                 status_msg = ''
@@ -161,6 +167,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 ### helper functions ###
 
     def _get_cfg_value_list(self, cfg_section, cfg_setting):
+        """Load configuration values."""
         return [x.strip() for x in self.config.get(cfg_section, cfg_setting).split(',')]
 
     def _getCmd(self, cmd):
