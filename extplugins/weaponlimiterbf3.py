@@ -108,8 +108,8 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             
             if self.config.has_section(_current_map) and _current_gameType in self.get_cfg_value_list(_current_map, 'gametype'):
                 self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
-                self.console.say(self.getMessage('weaponlimiter_enabled', self.config.get(_current_map, 'weapons')))
                 self.forbidden_weapons = self.get_cfg_value_list(_current_map, 'weapons')
+                self.console.say(self.getMessage('weaponlimiter_enabled', ', '.join(self.forbidden_weapons)))
             else:
                 self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
                 self.disable_weaponlimiter()
@@ -157,8 +157,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if data not in ('on', 'off', 'pause'):
                     client.message("Invalid parameter. Expecting one of : 'on', 'off', 'pause'")
                 elif data == 'on':
-                    self.weapon_limiter_is_active = True
-                    self.configure_weaponlimiter()
+                    if self.weapon_limiter_is_active:
+                        client.message('WeaponLimiter is allready active.')
+                    else:
+                        self.weapon_limiter_is_active = True
+                        self.configure_weaponlimiter()
                 elif data == 'off':
                     self.disable_weaponlimiter()
                     
