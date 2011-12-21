@@ -5,7 +5,7 @@
 	</settings>
 
 	<settings name="messages">
-        <set name="weaponlimiter_enabled">WeaponLimiter for that round activated! ^7Forbidden Weapons are:</set>
+        <set name="weaponlimiter_enabled">WeaponLimiter for that round activated! ^7Forbidden Weapons are: %s</set>
         <set name="weaponlimiter_disabled">Weaponlimiter disabled! All Weapons allowed.</set>
 		<set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
 	</settings>
