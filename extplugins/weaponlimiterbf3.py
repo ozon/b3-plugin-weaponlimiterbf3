@@ -25,6 +25,7 @@
 import b3
 import b3.events
 import b3.plugin
+import b3.cron
 
 __version__ = '0.1'
 __author__ = 'ozon'
@@ -33,6 +34,7 @@ __author__ = 'ozon'
 class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _adminPlugin = None
     weapon_limiter_is_active = None
+    _cronTab = None
 
     # load punisher setting in a dict
     # TODO: should test option and more generic
@@ -110,6 +112,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
                 self.forbidden_weapons = self.get_cfg_value_list(_current_map, 'weapons')
                 self.console.say(self.getMessage('weaponlimiter_enabled', ', '.join(self.forbidden_weapons)))
+                self.setup_crontab()
             else:
                 self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
                 self.disable_weaponlimiter()
@@ -141,7 +144,17 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self.console.say(self._weaponlimiter_disabled_msg)
             
         self.weapon_limiter_is_active = False
-            
+        #remove crontab
+        if self._cronTab:
+            self.console.cron - self._cronTab
+
+    def notice_forbidden_weapons(self):
+        self.console.say(self.getMessage('notice', ', '.join(self.forbidden_weapons)))
+
+    def setup_crontab(self):
+        notify_every_min = self.config.getint('settings', 'notice_message_cron')
+        self._cronTab = b3.cron.PluginCronTab(self, self.notice_forbidden_weapons, 0, notify_every_min, '*', '*', '*', '*')
+        self.console.cron + self._cronTab
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
         """ Handle Plugin commands """
