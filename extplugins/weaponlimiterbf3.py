@@ -149,11 +149,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self.console.cron - self._cronTab
 
     def notice_forbidden_weapons(self):
-        self.console.say(self.getMessage('notice', ', '.join(self.forbidden_weapons)))
+        self.console.say(self.getMessage('notice_message', ', '.join(self.forbidden_weapons)))
 
     def setup_crontab(self):
         notify_every_min = self.config.getint('settings', 'notice_message_cron')
-        self._cronTab = b3.cron.PluginCronTab(self, self.notice_forbidden_weapons, 0, notify_every_min, '*', '*', '*', '*')
+        self._cronTab = b3.cron.PluginCronTab(self, self.notice_forbidden_weapons, minute='*/%s' % notify_every_min)
         self.console.cron + self._cronTab
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
