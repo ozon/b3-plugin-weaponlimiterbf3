@@ -14,12 +14,19 @@ Usage
 * !weaponlimiter on enable the WeaponLimiter
 * !weaponlimiter off disable the Limiter
 
+Notes
+-----
+Note [EA´s ROH](https://help.ea.com/article/battlefield-rules-of-conduct) if you want to use the plugin on ranked servers!
+Weapons are not restricted by this Plugin. The Players can select and use them. But he must live with the consequences.
+I have no closures due to this plugin known.
+But be warned.
+
 Contributing
 ------------
 
-1. Fork it.
-2. Test it
-3. Visit [our Battlefield3 Server](http://battlelog.battlefield.com/bf3/de/servers/show/b5e4367c-4196-4691-bcc6-56ae0b2c0238/) - This Plugin is on Metro Maps active 
+* Fork it.
+* Test it
+* Visit [our Battlefield3 Server](http://battlelog.battlefield.com/bf3/de/servers/show/b5e4367c-4196-4691-bcc6-56ae0b2c0238/) - This Plugin is on Metro Maps active 
 
 
 Support
