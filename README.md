@@ -1,4 +1,5 @@
-﻿# WeaponLimiterBF3 plugin for Big Brother Bot #
+﻿
+# WeaponLimiterBF3 plugin for Big Brother Bot #
 
 Installation
 ------------
