@@ -1,4 +1,4 @@
-# WeaponLimiterBF3 plugin for Big Brother Bot #
+ï»¿# WeaponLimiterBF3 plugin for Big Brother Bot #
 
 Installation
 ------------
@@ -16,7 +16,7 @@ Usage
 
 Notes
 -----
-Note [EA´s ROH](https://help.ea.com/article/battlefield-rules-of-conduct) if you want to use the plugin on ranked servers!
+Note [EA's ROH](https://help.ea.com/article/battlefield-rules-of-conduct) if you want to use the plugin on ranked servers!
 Weapons are not restricted by this Plugin. The Players can select and use them. But he must live with the consequences.
 I have no closures due to this plugin known.
 But be warned.
