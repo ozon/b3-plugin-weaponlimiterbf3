@@ -72,8 +72,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         self.registerEvent(b3.events.EVT_GAME_ROUND_START)
         # load punisher settings
         self._punisher_settings = self.load_punisherConfig()
-
-        self._cronTab = None
+        
 
 
     def onEvent(self, event):
@@ -155,8 +154,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     def setup_crontab(self):
         notify_every_min = self.config.getint('settings', 'notice_message_cron')
         self._cronTab = b3.cron.PluginCronTab(self, self.notice_forbidden_weapons, minute='*/%s' % notify_every_min)
-        if not self._cronTab:
-            self.console.cron + self._cronTab
+        self.console.cron + self._cronTab
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
         """ Handle Plugin commands """
