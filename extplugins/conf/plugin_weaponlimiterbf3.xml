@@ -1,39 +1,38 @@
 <configuration plugin="weaponlimiterbf3">
+    <settings name="commands">
+        <set name="weaponlimiter-wpl">60</set>
+    </settings>
 
-	<settings name="commands">
-		<set name="weaponlimiter-wpl">60</set>
-	</settings>
-
-	<settings name="messages">
+    <settings name="messages">
         <set name="weaponlimiter_enabled">WeaponLimiter for that round activated! ^7Forbidden Weapons are: %s</set>
         <set name="weaponlimiter_disabled">Weaponlimiter disabled! All Weapons allowed.</set>
-		<set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
-        <set name="notice_message">Forbidden Weapons are: %s</set> <!-- Notification of forbidden weapons --> 
-	</settings>
+        <set name="warn_message">You used a forbidden weapon! ^7!forbidden_weapons show the list of forbidden weapons</set>
+        <set name="notice_message">Forbidden Weapons are: %s</set> <!-- Notification of forbidden weapons -->
+    </settings>
 
-	<settings name="settings">
-	    <set name="whitelist_level">60</set> <!-- users in group level are whitelistet / irgnored by weaponlimiter -->
+    <settings name="settings">
+        <set name="whitelist_level">60</set> <!-- users in group level are whitelistet / irgnored by weaponlimiter -->
         <set name="notice_message_cron">05</set> <!-- Inform every 30 mins of forbidden weapons -->
-	</settings>
-	<settings name="punisher-settings">
-		<set name="kill_player">yes</set> <!-- kill player (without scoring effects) -->
-		<set name="warn_player">yes</set> <!-- warn player with Warn system (player got kick after x warning) -->
-		
-		<!-- DONT ENABLE the follow settings on Ranked Servers -->
-		<set name="kick_player">no</set> <!-- kick player instant - all other punisher settings are ignored -->
-	</settings>
-	
+    </settings>
+
+    <settings name="punisher-settings">
+        <set name="kill_player">yes</set> <!-- kill player (without scoring effects) -->
+        <set name="warn_player">yes</set> <!-- warn player with Warn system (player got kick after x warning) -->
+
+        <!-- DONT ENABLE the follow settings on Ranked Servers -->
+        <set name="kick_player">no</set> <!-- kick player instant - all other punisher settings are ignored -->
+    </settings>
 
     <!-- Weapon and Map configuration -->
     <settings name="MP_Subway"> <!-- identify forbidden weapons per mapname  -->
-		<set name="weapons">SMAW, M320, RPG-7, USAS-12</set> <!-- comma delimited list of forbidden weapons -->
+        <set name="weapons">SMAW, M320, RPG-7, USAS-12</set> <!-- comma delimited list of forbidden weapons -->
         <set name="gametype">SquadDeathMatch0, ConquestSmall0, ConquestLarge0</set> <!-- comma delimited list of gametypes (TODO: implement "all" for every) -->
-	</settings>
-    
-    <!-- sample add second map configuration 
+    </settings>
+
+    <!-- sample add second map configuration
     <settings name="MP_011">
-		<set name="weapons">SMAW, M320, RPG-7</set>
-        <set name="gametype">SquadDeathMatch0, ConquestSmall0</set>
-	</settings> -->
-    
+    <set name="weapons">SMAW, M320, RPG-7</set>
+            <set name="gametype">SquadDeathMatch0, ConquestSmall0</set>
+    </settings> -->
+
 </configuration>
