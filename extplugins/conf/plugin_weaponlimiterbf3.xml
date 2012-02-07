@@ -27,6 +27,7 @@
     <settings name="MP_Subway"> <!-- identify forbidden weapons per mapname  -->
         <set name="weapons">SMAW, M320, RPG-7, USAS-12</set> <!-- comma delimited list of forbidden weapons -->
         <set name="gametype">SquadDeathMatch0, ConquestSmall0, ConquestLarge0</set> <!-- comma delimited list of gametypes (TODO: implement "all" for every) -->
+        <set name="mode">blacklist</set> <!-- Set blacklist or whitelist for describe weapons list as allowed or disallowed -->
     </settings>
 
     <!-- sample add second map configuration
