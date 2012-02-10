@@ -32,7 +32,7 @@
     </settings>
     <!-- Weapon and Map configuration - only allow Pistol and Knife -->
     <settings name="MP_017">
-        <set name="weapons">Meele, M9, Glock18, M1911, M93R, Weapons/Knife/Knife,  Weapons/MP412Rex/MP412REX, Weapons/MP443/MP443, Taurus .44</set>
+        <set name="weapons">Death, Meele, M9, Glock18, M1911, M93R, Weapons/Knife/Knife,  Weapons/MP412Rex/MP412REX, Weapons/MP443/MP443, Taurus .44</set>
         <set name="gametype">TeamDeathMatch0</set>
         <set name="mode">whitelist</set>
     </settings>
