@@ -29,6 +29,12 @@
         <set name="gametype">SquadDeathMatch0, ConquestSmall0, ConquestLarge0</set> <!-- comma delimited list of gametypes (TODO: implement "all" for every) -->
         <set name="mode">blacklist</set> <!-- Set blacklist or whitelist for describe weapons list as allowed or disallowed -->
     </settings>
+    <!-- Weapon and Map configuration - only allow Pistol and Knife -->
+    <settings name="MP_017">
+        <set name="weapons">Meele, M9, Glock18, M1911, M93R, Weapons/MP412Rex/MP412REX, Weapons/MP443/MP443, Taurus .44</set>
+        <set name="gametype">TeamDeathMatch0</set>
+        <set name="mode">whitelist</set>
+    </settings>
 
     <!-- sample add second map configuration
     <settings name="MP_011">
