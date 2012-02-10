@@ -31,6 +31,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _punisherCfg = {}
     _message = {}
     _weapon_list = []
+    _mode = None
 
     def onLoadConfig(self):
         # remove eventual existing crontab
@@ -70,9 +71,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 weapon = event.data[1]
                 if weapon in self._weapon_list and self._mode == 'blacklist':
                     self.debug('%s in pattern detected' % weapon)
-                    self.punish_player(self, event)
+                    self._punish_player(self, event)
                 elif weapon not in self._weapon_list and self._mode == 'whitelist':
-                    self.punish_player(self, event)
+                    self._punish_player(self, event)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
                     ##no outout msg## killer.warn('1h', _wmsg, None, None, '')
                     #self._adminPlugin.warnClient(killer.id, '', True, False, _wmsg, 1)
@@ -83,13 +84,13 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         if event.type == b3.events.EVT_GAME_ROUND_START and self._wpl_is_active:
             try:
-                self.configure_weaponlimiter()
+                self._configure_wpl()
             except IndexError:
                 pass
 
 
     # configure limiter per map
-    def configure_weaponlimiter(self):
+    def _configure_wpl(self):
         """ Load weaponlimiter Configuration per map/gametype """
         _current_map = self.console.game.mapName
         _current_gameType = self.console.game.gameType
@@ -108,7 +109,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self._update_crontab()
 
     # punish player
-    def punish_player(self, event, data=None, client=None):
+    def _punish_player(self, event, data=None, client=None):
         """ Punish player """
         weapon = data.data[1]
         killer = data.client
@@ -127,7 +128,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             pass
 
 
-    def disable_weaponlimiter(self):
+    def _disable_wpl(self):
         """ Disable weaponlimiter activity """
         self._weapon_list = []
         if self._wpl_is_active:
@@ -169,9 +170,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                         client.message('WeaponLimiter is allready active.')
                     else:
                         self._wpl_is_active = True
-                        self.configure_weaponlimiter()
+                        self._configure_wpl()
                 elif data == 'off':
-                    self.disable_weaponlimiter()
+                    self._disable_wpl()
 
 
 ### helper functions ###
