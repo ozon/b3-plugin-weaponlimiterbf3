@@ -18,7 +18,6 @@
     <settings name="punisher-settings">
         <set name="kill_player">yes</set> <!-- kill player (without scoring effects) -->
         <set name="warn_player">yes</set> <!-- warn player with Warn system (player got kick after x warning) -->
-
         <!-- DONT ENABLE the follow settings on Ranked Servers -->
         <set name="kick_player">no</set> <!-- kick player instant - all other punisher settings are ignored -->
     </settings>
