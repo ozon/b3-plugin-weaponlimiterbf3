@@ -1,6 +1,11 @@
 ﻿WeaponLimiterBF3 plugin for Big Brother Bot
 ===========================================
 
+What is it?
+-----------
+This plugin is for the [B3 Bot](http://www.bigbrotherbot.net/).
+It allows to ban weapons in Battlefield 3.
+
 Installation
 ------------
 * copy weaponlimiterbf3.py into b3/extplugins
@@ -11,9 +16,9 @@ Installation
 
 Usage
 -----
-* !weaponlimiter (alias !wpl) show the status
-* !weaponlimiter on enable the WeaponLimiter
-* !weaponlimiter off disable the Limiter
+* ```!weaponlimiter``` (alias !wpl) show the status
+* ```!weaponlimiter on``` enable the WeaponLimiter
+* ```!weaponlimiter off``` disable the Limiter
 
 Notes
 -----
@@ -36,5 +41,5 @@ Not realy. Watch to http://forum.bigbrotherbot.net/bf3b3-beta-board/weaponlimite
 
 Thanks
 ------
-* HarryGer1991 for testing in long nights
+* HarryGer1991, LunaticBfc  for testing in long nights
 * [courgette](https://github.com/courgette) and the b3 project for code samples
