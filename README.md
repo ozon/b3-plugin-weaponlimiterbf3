@@ -20,6 +20,8 @@ Usage
 * ```!weaponlimiter on``` enable the WeaponLimiter
 * ```!weaponlimiter off``` disable the Limiter
 
+If you use whitelist mode, then add 'Death' to the list!
+
 Notes
 -----
 Note [EA's ROH](https://help.ea.com/article/battlefield-rules-of-conduct) if you want to use the plugin on ranked servers!
