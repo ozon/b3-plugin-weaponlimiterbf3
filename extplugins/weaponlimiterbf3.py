@@ -124,9 +124,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             _wmsg = '%s is forbidden!' % weapon
             self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
 
-        if self._punisherCfg['kick_player']:
-            pass
-
 
     def _disable_wpl(self):
         """ Disable weaponlimiter activity """
