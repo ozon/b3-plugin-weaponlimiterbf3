@@ -12,7 +12,6 @@
     </settings>
 
     <settings name="settings">
-        <set name="whitelist_level">60</set> <!-- users in group level are whitelistet / irgnored by weaponlimiter -->
         <set name="notice_message_cron">05</set> <!-- Inform every 30 mins of forbidden weapons -->
     </settings>
 
