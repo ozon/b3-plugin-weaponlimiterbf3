@@ -101,7 +101,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             self._weapon_list = self.get_cfg_value_list(_current_map, 'weapons')
             self._mode =  self.config.get(_current_map, 'mode')
             self.console.say(self.getMessage('weaponlimiter_enabled'))
-            self.notice_forbidden_weapons()
+            self._report_weaponlist()
             self._update_crontab()
         else:
             self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
@@ -135,7 +135,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             if self._cronTab:
                 self.console.cron - self._cronTab
 
-    def notice_forbidden_weapons(self):
+    def _report_weaponlist(self):
         if self._mode == 'blacklist':
             self.console.say(self.getMessage('forbidden_message', ', '.join(self._weapon_list)))
         elif self._mode == 'whitelist':
@@ -144,7 +144,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     def _update_crontab(self):
         if self._weapon_list:
             notify_every_min = self.config.getint('settings', 'notice_message_cron')
-            self._cronTab = b3.cron.PluginCronTab(self, self.notice_forbidden_weapons, minute='*/%s' % notify_every_min)
+            self._cronTab = b3.cron.PluginCronTab(self, self._report_weaponlist, minute='*/%s' % notify_every_min)
             if not self._cronTab:
                 self.console.cron + self._cronTab
         else:
