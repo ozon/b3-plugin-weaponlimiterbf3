@@ -183,7 +183,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         """
         return [x.strip() for x in self.config.get(cfg_section, cfg_setting).split(',')]
 
-    def getCmd(self, cmd):
+    def _getCmd(self, cmd):
         cmd = 'cmd_%s' % cmd
         if hasattr(self, cmd):
             func = getattr(self, cmd)
@@ -200,7 +200,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if len(sp) == 2:
                     cmd, alias = sp
 
-                func = self.getCmd(cmd)
+                func = self._getCmd(cmd)
                 if func:
                     self._adminPlugin.registerCommand(self, cmd, level, func, alias)
 
