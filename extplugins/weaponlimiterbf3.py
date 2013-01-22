@@ -20,6 +20,7 @@ import b3
 import b3.events
 import b3.plugin
 import b3.cron
+from b3.parsers.frostbite2.protocol import CommandFailedError
 
 __version__ = '0.2'
 __author__ = 'ozon'
