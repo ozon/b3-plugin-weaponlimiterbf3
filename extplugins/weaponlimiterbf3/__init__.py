@@ -19,7 +19,6 @@
 import b3
 import b3.events
 import b3.plugin
-import b3.cron
 from b3.parsers.frostbite2.protocol import CommandFailedError
 from pluginconf import PluginConfig
 from weapondef import WEAPON_NAMES_BY_ID
@@ -32,11 +31,8 @@ __author__ = 'ozon'
 class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     _adminPlugin = None
     _wpl_is_active = None
-    _cronTab = None
     _messages = {}
     _default_messages = {}
-    _weapon_list = []
-    _mode = None
     _plugin_config = None
 
     # general settings
@@ -71,9 +67,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                                           to_settings=self._punisher_settings)
         # load map configuration
         self._load_mapconfiguration()
-        # remove eventual existing crontab
-        if self._cronTab:
-            self.console.cron - self._cronTab
 
         # Load messages
         for key in self.config.options('messages'):
@@ -146,14 +139,10 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         if _current_map in self._mapconfig and _current_gameType in self._mapconfig[_current_map]['gametype']:
             self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
-            self._weapon_list = self._mapconfig[_current_map].get('weapons')
             self.console.say(self.getMessage('weaponlimiter_enabled'))
             self._report_weaponlist()
-            self._update_crontab()
         else:
             self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
-            self._weapon_list = []
-            self._update_crontab()
 
     # punish player
     def _punish_player(self, event, data=None, client=None):
@@ -173,13 +162,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def _disable_wpl(self):
         """ Disable weaponlimiter activity """
-        self._weapon_list = []
         if self._wpl_is_active:
             self.console.say(self._messages['weaponlimiter_disabled'])
             self._wpl_is_active = False
-            self._update_crontab()
-            if self._cronTab:
-                self.console.cron - self._cronTab
 
     def _report_weaponlist(self, client=None):
         if self._wpl_is_active:
@@ -195,16 +180,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 client.message(msg)
             else:
                 self.console.say(msg)
-
-    def _update_crontab(self):
-        if self._weapon_list:
-            notify_every_min = self.config.getint('settings', 'notice_message_cron')
-            self._cronTab = b3.cron.PluginCronTab(self, self._report_weaponlist, minute='*/%s' % notify_every_min)
-            if not self._cronTab:
-                self.console.cron + self._cronTab
-        else:
-            if self._cronTab:
-                self.console.cron - self._cronTab
 
     def _maps_from_fonfig(self):
         _maps = dict()
