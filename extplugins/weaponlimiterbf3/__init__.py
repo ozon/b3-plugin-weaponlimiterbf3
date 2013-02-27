@@ -70,7 +70,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         self._plugin_config.load_settings(default_settings=self._default_punisher_settings, section='punisher',
                                           to_settings=self._punisher_settings)
         # load map configuration
-        self.load_mapconfiguration()
+        self._load_mapconfiguration()
         # remove eventual existing crontab
         if self._cronTab:
             self.console.cron - self._cronTab
@@ -106,7 +106,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if killer.name == event.target.name:
                     self.debug('Suicide detected.')
                     return
-                elif self.is_forbidden_weapon(weapon):
+                elif self._is_forbidden_weapon(weapon):
                     self.debug('%s in pattern detected' % weapon)
                     self._punish_player(self, event)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
@@ -123,7 +123,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             except IndexError:
                 pass
 
-    def is_forbidden_weapon(self, weapon):
+    def _is_forbidden_weapon(self, weapon):
         """Check if a weapon in the list of banned weapons."""
         weaponlist = self._mapconfig[self.console.game.mapName].get('weapons')
         mode = self._mapconfig[self.console.game.mapName].get('mode')
@@ -208,7 +208,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         return _maps
 
-    def load_mapconfiguration(self):
+    def _load_mapconfiguration(self):
 
         def setmapconfig(mapid):
             self._mapconfig.update({
@@ -220,11 +220,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         for mapid in _maps:
             self.debug('Load map configuration for %s', MAP_NAME_BY_ID[mapid])
             setmapconfig(mapid)
-            if not self.mapconfig_is_valid(mapid):
+            if not self._mapconfig_is_valid(mapid):
                 self.error('Configuration for %s are wrong!', mapid)
                 self._mapconfig.pop(mapid)
 
-    def mapconfig_is_valid(self, mapid):
+    def _mapconfig_is_valid(self, mapid):
         # check weapon list
         for weapon in self._mapconfig[mapid].get('weapons'):
             if weapon not in list(WEAPON_NAMES_BY_ID):
