@@ -38,7 +38,7 @@ class PluginConfig(object):
             _get_config_obj = getattr(self._plugin.config, 'get' + optiontype)
             try:
                 _setting = _get_config_obj(section, k)
-                self._plugin.debug('Set %s to %s(%s) from %s' % (k, optiontype, v, self._plugin.config.fileName))
+                self._plugin.debug('Set %s to %s(%s) from %s' % (k, optiontype, _setting, self._plugin.config.fileName))
             except NoOptionError, err:
                 _setting = default_settings[k]
                 self._plugin.warning('%s ist not set in section %s. Set %s to %s(%s) from DEFAULS' % (
