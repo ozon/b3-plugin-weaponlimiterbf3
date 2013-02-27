@@ -158,7 +158,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
     # punish player
     def _punish_player(self, event, data=None, client=None):
         """ Punish player """
-        weapon = data.data[1]
+        weapon = WEAPON_NAMES_BY_ID[data.data[1]]['name']
         killer = data.client
         if self._punisher_settings['kill_player']:
             try:
