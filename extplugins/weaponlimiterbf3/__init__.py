@@ -137,6 +137,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         return False
 
         # configure limiter per map
+
     def _configure_wpl(self):
         """ Load weaponlimiter Configuration per map/gametype """
         _current_map = self.console.game.mapName
@@ -181,10 +182,12 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 self.console.cron - self._cronTab
 
     def _report_weaponlist(self):
-        if self._mode == 'blacklist':
-            self.console.say(self.getMessage('forbidden_message', ', '.join(self._weapon_list)))
-        elif self._mode == 'whitelist':
-            self.console.say(self.getMessage('allowed_message', ', '.join(self._weapon_list)))
+        if self._mapconfig[self.console.game.mapName]['mode'] == 'blacklist':
+            self.console.say(self.getMessage('forbidden_message', ', '.join(
+                self._get_human_readable_weaponlist(self._mapconfig[self.console.game.mapName]['weapons']))))
+        elif self._mapconfig[self.console.game.mapName]['mode'] == 'whitelist':
+            self.console.say(self.getMessage('allowed_message', ', '.join(
+                self._get_human_readable_weaponlist(self._mapconfig[self.console.game.mapName]['weapons']))))
 
     def _update_crontab(self):
         if self._weapon_list:
@@ -230,13 +233,20 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             if weapon not in list(WEAPON_NAMES_BY_ID):
                 self.debug('%s is not a valied weapon')
                 return False
-        #check gamemodes
+            #check gamemodes
         for gamemode in self._mapconfig[mapid].get('gametype'):
             if gamemode not in GAME_MODES_BY_MAP_ID[mapid] or gamemode in self._disable_on_gamemode:
                 self.debug('%s not support %s' % (mapid, gamemode))
                 return False
 
         return True
+
+    def _get_human_readable_weaponlist(self, weaponlist):
+        _weaponlist = list()
+        for weapon in weaponlist:
+            _weaponlist.append(WEAPON_NAMES_BY_ID[weapon]['name'])
+
+        return _weaponlist
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
         """ Handle WeaponLimiter """
