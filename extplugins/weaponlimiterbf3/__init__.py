@@ -23,7 +23,7 @@ import b3.cron
 from b3.parsers.frostbite2.protocol import CommandFailedError
 from pluginconf import PluginConfig
 from weapondef import WEAPON_NAMES_BY_ID
-from b3.parsers.bf3 import MAP_NAME_BY_ID, GAME_MODES_NAMES, MAP_ID_BY_NAME
+from b3.parsers.bf3 import MAP_NAME_BY_ID, GAME_MODES_NAMES, MAP_ID_BY_NAME, GAME_MODES_BY_MAP_ID
 
 __version__ = '0.9.0'
 __author__ = 'ozon'
@@ -215,19 +215,28 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 mapid: dict()
             })
             self._plugin_config.load_settings(self._mapconfig_template, mapid, self._mapconfig[mapid])
-            self._test_weapons(self._mapconfig[mapid]['weapons'])
-            # ToDo: test gamemode
 
         _maps = self._maps_from_fonfig()
         for mapid in _maps:
             self.debug('Load map configuration for %s', MAP_NAME_BY_ID[mapid])
             setmapconfig(mapid)
+            if not self.mapconfig_is_valid(mapid):
+                self.error('Configuration for %s are wrong!', mapid)
+                self._mapconfig.pop(mapid)
 
-    def _test_weapons(self, weapons):
-        for weapon in weapons:
+    def mapconfig_is_valid(self, mapid):
+        # check weapon list
+        for weapon in self._mapconfig[mapid].get('weapons'):
             if weapon not in list(WEAPON_NAMES_BY_ID):
-                self.error('%s is not a valied wepoan')
-                # TODO: kick config
+                self.debug('%s is not a valied weapon')
+                return False
+        #check gamemodes
+        for gamemode in self._mapconfig[mapid].get('gametype'):
+            if gamemode not in GAME_MODES_BY_MAP_ID[mapid] or gamemode in self._disable_on_gamemode:
+                self.debug('%s not support %s' % (mapid, gamemode))
+                return False
+
+        return True
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
         """ Handle WeaponLimiter """
