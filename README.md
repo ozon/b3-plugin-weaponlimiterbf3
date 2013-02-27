@@ -8,14 +8,16 @@ It allows to ban weapons in Battlefield 3.
 
 Installation
 ------------
-* copy weaponlimiterbf3.py into b3/extplugins
-* copy conf/plugin_weaponlimiterbf3.xml into b3/extplugins/conf
-* add `<plugin name="weaponlimiterbf3" config="@conf/extplugins/plugin_weaponlimiterbf3.xml"/>` in you main b3 config file
-* modify plugin_weaponlimiterbf3.xml
+* copy the folder weaponlimiterbf3 into b3/extplugins
+* copy conf/plugin_weaponlimiterbf3.ini into b3/extplugins/conf
+* add `<plugin name="weaponlimiterbf3" config="@conf/extplugins/plugin_weaponlimiterbf3.ini"/>` in you main b3 config file
+* modify plugin_weaponlimiterbf3.ini
 
 
 Usage
 -----
+* ```!weaponlimits``` show the current blacklisted/whitelisted weapons
+
 * ```!weaponlimiter``` (alias !wpl) show the status
 * ```!weaponlimiter on``` enable the WeaponLimiter
 * ```!weaponlimiter off``` disable the Limiter
