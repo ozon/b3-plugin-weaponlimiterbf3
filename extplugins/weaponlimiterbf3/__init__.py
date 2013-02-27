@@ -182,18 +182,19 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 self.console.cron - self._cronTab
 
     def _report_weaponlist(self, client=None):
-        msg = 'No Limits aktive'
-        if self._mapconfig[self.console.game.mapName]['mode'] == 'blacklist':
-            msg = self.getMessage('forbidden_message', ', '.join(
-                self._get_human_readable_weaponlist()))
-        elif self._mapconfig[self.console.game.mapName]['mode'] == 'whitelist':
-            msg = self.getMessage('allowed_message', ', '.join(
-                self._get_human_readable_weaponlist()))
+        if self._wpl_is_active:
+            msg = 'No Limits aktive'
+            if self._mapconfig[self.console.game.mapName]['mode'] == 'blacklist':
+                msg = self.getMessage('forbidden_message', ', '.join(
+                    self._get_human_readable_weaponlist()))
+            elif self._mapconfig[self.console.game.mapName]['mode'] == 'whitelist':
+                msg = self.getMessage('allowed_message', ', '.join(
+                    self._get_human_readable_weaponlist()))
 
-        if client:
-            client.message(msg)
-        else:
-            self.console.say(msg)
+            if client:
+                client.message(msg)
+            else:
+                self.console.say(msg)
 
     def _update_crontab(self):
         if self._weapon_list:
@@ -279,8 +280,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def cmd_weaponlimits(self, data, client, cmd=None):
         """ Show weapon Limits """
-        msg = ''
-        if client:
+        if client and self._wpl_is_active:
             self._report_weaponlist(client)
 
     def _getCmd(self, cmd):
