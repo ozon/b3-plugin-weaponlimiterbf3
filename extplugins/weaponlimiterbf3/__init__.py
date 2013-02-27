@@ -103,10 +103,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             try:
                 killer = event.client
                 weapon = event.data[1]
-                if weapon in self._weapon_list and self._mode == 'blacklist':
+                if killer.name == event.target.name:
+                    self.debug('Suicide detected.')
+                    return
+                elif self.is_forbidden_weapon(weapon):
                     self.debug('%s in pattern detected' % weapon)
-                    self._punish_player(self, event)
-                elif weapon not in self._weapon_list and self._mode == 'whitelist':
                     self._punish_player(self, event)
                     ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
                     ##no outout msg## killer.warn('1h', _wmsg, None, None, '')
@@ -122,7 +123,20 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             except IndexError:
                 pass
 
-    # configure limiter per map
+    def is_forbidden_weapon(self, weapon):
+        """Check if a weapon in the list of banned weapons."""
+        weaponlist = self._mapconfig[self.console.game.mapName].get('weapons')
+        mode = self._mapconfig[self.console.game.mapName].get('mode')
+        if mode == 'blacklist':
+            if weapon in weaponlist:
+                return True
+        elif mode == 'whitelist':
+            if weapon not in weaponlist:
+                return True
+
+        return False
+
+        # configure limiter per map
     def _configure_wpl(self):
         """ Load weaponlimiter Configuration per map/gametype """
         _current_map = self.console.game.mapName
@@ -132,7 +146,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         if _current_map in self._mapconfig and _current_gameType in self._mapconfig[_current_map]['gametype']:
             self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
             self._weapon_list = self._mapconfig[_current_map].get('weapons')
-            self._mode = self.config.get(_current_map, 'mode')
             self.console.say(self.getMessage('weaponlimiter_enabled'))
             self._report_weaponlist()
             self._update_crontab()
@@ -146,14 +159,14 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         """ Punish player """
         weapon = data.data[1]
         killer = data.client
-        if self._settings['kill_player']:
+        if self._punisher_settings['kill_player']:
             try:
                 self.console.write(('admin.killPlayer', killer.name))
                 killer.message('Kill reason: Killed by Admin. %s is forbidden!' % weapon)
             except CommandFailedError, err:
                 killer.message('%s is forbidden!' % weapon)
 
-        if self._settings['warn_player']:
+        if self._punisher_settings['warn_player']:
             _wmsg = '%s is forbidden!' % weapon
             self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
 
@@ -197,17 +210,18 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def load_mapconfiguration(self):
 
-        def loadmapconfig(mapid):
+        def setmapconfig(mapid):
             self._mapconfig.update({
                 mapid: dict()
             })
             self._plugin_config.load_settings(self._mapconfig_template, mapid, self._mapconfig[mapid])
             self._test_weapons(self._mapconfig[mapid]['weapons'])
+            # ToDo: test gamemode
 
         _maps = self._maps_from_fonfig()
         for mapid in _maps:
             self.debug('Load map configuration for %s', MAP_NAME_BY_ID[mapid])
-            loadmapconfig(mapid)
+            setmapconfig(mapid)
 
     def _test_weapons(self, weapons):
         for weapon in weapons:
@@ -235,16 +249,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 elif data == 'off':
                     self._disable_wpl()
 
-                    ### helper functions ###
-
-    def get_cfg_value_list(self, cfg_section, cfg_setting):
-        """
-        Load values from plugin configuration section
-        @return: list from section values
-        @param cfg_section: section in config File
-        """
-        return [x.strip() for x in self.config.get(cfg_section, cfg_setting).split(',')]
-
     def _getCmd(self, cmd):
         cmd = 'cmd_%s' % cmd
         if hasattr(self, cmd):
@@ -267,18 +271,24 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                     self._adminPlugin.registerCommand(self, cmd, level, func, alias)
 
 
-
-
 if __name__ == '__main__':
-    from b3.fake import fakeConsole, superadmin, joe
+    from b3.fake import fakeConsole, superadmin, joe, simon
     import time
 
     myplugin = Weaponlimiterbf3Plugin(fakeConsole, 'conf/plugin_weaponlimiterbf3.ini')
     myplugin.onStartup()
     time.sleep(2)
     myplugin.console.game.gameName = 'bf3'
-    myplugin.console.game.gameType = 'ConquestSmall0'
-    myplugin.console.game._mapName = 'MP_Subway'
+    myplugin.console.game.gameType = 'Domination0'
+    myplugin.console.game._mapName = 'XP2_Skybar'
+    superadmin.connects(cid=0)
+    # make joe connect to the fake game server on slot 1
+    joe.connects(cid=1)
+    # make joe connect to the fake game server on slot 2
+    simon.connects(cid=2)
+    # superadmin put joe in group user
+    superadmin.says('!putgroup joe user')
+    superadmin.says('!putgroup simon user')
 
     superadmin.connects(cid=0)
     superadmin.says('!weaponlimiter')
