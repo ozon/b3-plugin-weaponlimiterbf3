@@ -185,10 +185,10 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         msg = 'No Limits aktive'
         if self._mapconfig[self.console.game.mapName]['mode'] == 'blacklist':
             msg = self.getMessage('forbidden_message', ', '.join(
-                self._get_human_readable_weaponlist(self._mapconfig[self.console.game.mapName]['weapons'])))
+                self._get_human_readable_weaponlist()))
         elif self._mapconfig[self.console.game.mapName]['mode'] == 'whitelist':
             msg = self.getMessage('allowed_message', ', '.join(
-                self._get_human_readable_weaponlist(self._mapconfig[self.console.game.mapName]['weapons'])))
+                self._get_human_readable_weaponlist()))
 
         if client:
             client.message(msg)
@@ -247,8 +247,11 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         return True
 
-    def _get_human_readable_weaponlist(self, weaponlist):
+    def _get_human_readable_weaponlist(self, weaponlist=None):
         _weaponlist = list()
+        if not weaponlist:
+            weaponlist = self._mapconfig[self.console.game.mapName]['weapons']
+
         for weapon in weaponlist:
             _weaponlist.append(WEAPON_NAMES_BY_ID[weapon]['name'])
 
