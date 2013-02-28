@@ -88,7 +88,9 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         self._wpl_is_active = False
         # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
-        #self.registerEvent(b3.events.EVT_GAME_ROUND_START)
+        self.registerEvent(b3.events.EVT_GAME_ROUND_WARMUP)
+        self.registerEvent(b3.events.EVT_GAME_ROUND_END)
+        self.registerEvent(b3.events.EVT_GAME_MAP_CHANGE)
 
     def onEvent(self, event):
         """ Handle CLIENT_KILL and GAME_ROUND_START events """
@@ -109,12 +111,18 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                     #   kill.
             except IndexError:
                 pass
+        # activate wpl if we have a configuration for the current map/gametype
+        if event.type == b3.events.EVT_GAME_ROUND_WARMUP:
+            if self.console.game.mapName in self._mapconfig:
+                if self.console.game.gameType in self._mapconfig[self.console.game.mapName]['gametype']:
+                    self.debug('Found configuration for current map/gametype. Activate Weaponlimiter.')
+                    self._wpl_is_active = True
+        # disable wpl on round end or mapchange
+        if event.type == b3.events.EVT_GAME_ROUND_END or event.type == b3.events.EVT_GAME_MAP_CHANGE:
+            if self._wpl_is_active:
+                self.debug('Round end or map changed. Disable Weaponlimiter')
+                self._wpl_is_active = False
 
-        #if event.type == b3.events.EVT_GAME_ROUND_START and self._wpl_is_active:
-        #    try:
-        #        self._configure_wpl()
-        #    except IndexError:
-        #        pass
 
     def _is_forbidden_weapon(self, weapon):
         """Check if a weapon in the list of banned weapons."""
