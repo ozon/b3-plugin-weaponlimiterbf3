@@ -42,6 +42,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         'config_strategy': ('mapname', 'gametype'),
         'anounce_limits_on_first_spawn': True,
         'self_kill_counter': 1,
+        'change servermessage': False,
     }
     # settings for players punishment
     _punisher_settings = {}
@@ -59,6 +60,8 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         'mode': 'blacklist'
     }
 
+    _old_servermessage = None
+
     def onLoadConfig(self):
         self._plugin_config = PluginConfig(self)
         # load configuration
@@ -67,6 +70,13 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                                           to_settings=self._punisher_settings)
         # load map configuration
         self._load_mapconfiguration()
+
+        # backup servermessage
+        if self._settings['change servermessage']:
+            try:
+                self._old_servermessage = self.console.getCvar('vars.serverMessage')
+            except CommandFailedError, err:
+                self.error('Failed to get vars.serverMessage')
 
         # Load messages
         for key in self.config.options('messages'):
@@ -121,11 +131,13 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 if self.console.game.gameType in self._mapconfig[self.console.game.mapName]['gametype']:
                     self.debug('Found configuration for current map/gametype. Activate Weaponlimiter.')
                     self._wpl_is_active = True
+                    self._update_servermessage()
         # disable wpl on round end or mapchange
         if event.type == b3.events.EVT_GAME_ROUND_END or event.type == b3.events.EVT_GAME_MAP_CHANGE:
             if self._wpl_is_active:
                 self.debug('Round end or map changed. Disable Weaponlimiter')
                 self._wpl_is_active = False
+                self._update_servermessage()
 
 
     def _is_forbidden_weapon(self, weapon):
@@ -177,6 +189,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         if self._wpl_is_active:
             self.console.say(self._messages['weaponlimiter_disabled'])
             self._wpl_is_active = False
+            self._update_servermessage()
 
     def _report_weaponlist(self, client=None):
         if self._wpl_is_active:
@@ -261,6 +274,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                         client.message('WeaponLimiter is allready active.')
                     else:
                         self._wpl_is_active = True
+                        self._update_servermessage()
                         #self._configure_wpl()
                 elif data == 'off':
                     self._disable_wpl()
@@ -290,6 +304,18 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 func = self._getCmd(cmd)
                 if func:
                     self._adminPlugin.registerCommand(self, cmd, level, func, alias)
+
+    def _update_servermessage(self):
+        """Update welcome message"""
+        _new_servermessage = self._old_servermessage
+        if self._settings['change servermessage'] and self._wpl_is_active:
+            _new_servermessage = self.config.get('messages', 'servermessage')
+
+        try:
+            self.console.setCvar('vars.serverMessage', _new_servermessage)
+            self.debug('Change servermessage to: %s', _new_servermessage)
+        except CommandFailedError, err:
+            self.error('Failed to change vars.serverMessage - Error: %s', err)
 
 
 if __name__ == '__main__':
