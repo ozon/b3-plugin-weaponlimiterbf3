@@ -126,7 +126,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             except IndexError:
                 pass
         # activate wpl if we have a configuration for the current map/gametype
-        if event.type == b3.events.EVT_GAME_ROUND_WARMUP:
+        if event.type == b3.events.EVT_GAME_WARMUP:
             if self.console.game.mapName in self._mapconfig:
                 if self.console.game.gameType in self._mapconfig[self.console.game.mapName]['gametype']:
                     self.debug('Found configuration for current map/gametype. Activate Weaponlimiter.')
