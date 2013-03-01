@@ -40,9 +40,9 @@ I have no closures due to this plugin known. But be warned!
 
 Contributing
 ------------
-* Fork it.
+* Fork it
 * Test it
-* Visit [our Battlefield3 Server](http://battlelog.battlefield.com/bf3/de/servers/show/b5e4367c-4196-4691-bcc6-56ae0b2c0238/) - This Plugin is on Metro Maps active 
+* Visit [our Battlefield3 Server](http://battlelog.battlefield.com/bf3/servers/show/11bdda3f-bb8b-4abb-92de-55f0b3ada7d7/)
 
 Support
 -------
