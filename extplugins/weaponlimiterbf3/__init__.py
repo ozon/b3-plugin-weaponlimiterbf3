@@ -77,7 +77,10 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def onStartup(self):
         """ Initialize plugin settings """
-
+        # check if bf3 game
+        if self.console.game.gameName != 'bf3':
+            self.error('This plugin only works with Battlefield3 (bf3).')
+            return False
         # try to load admin plugin
         self._adminPlugin = self.console.getPlugin('admin')
         if not self._adminPlugin:
@@ -294,9 +297,10 @@ if __name__ == '__main__':
     import time
 
     myplugin = Weaponlimiterbf3Plugin(fakeConsole, 'conf/plugin_weaponlimiterbf3.ini')
+    myplugin.console.game.gameName = 'bf3'
     myplugin.onStartup()
     time.sleep(2)
-    myplugin.console.game.gameName = 'bf3'
+
     myplugin.console.game.gameType = 'Domination0'
     myplugin.console.game._mapName = 'XP2_Skybar'
     superadmin.connects(cid=0)
