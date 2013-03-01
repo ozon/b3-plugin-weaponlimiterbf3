@@ -74,7 +74,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         # backup servermessage
         if self._settings['change servermessage']:
             try:
-                self._old_servermessage = self.console.getCvar('vars.serverMessage')
+                self._old_servermessage = self.console.getCvar('serverMessage')
             except CommandFailedError, err:
                 self.error('Failed to get vars.serverMessage')
 
@@ -312,7 +312,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
             _new_servermessage = self.config.get('messages', 'servermessage')
 
         try:
-            self.console.setCvar('vars.serverMessage', _new_servermessage)
+            self.console.setCvar('serverMessage', _new_servermessage)
             self.debug('Change servermessage to: %s', _new_servermessage)
         except CommandFailedError, err:
             self.error('Failed to change vars.serverMessage - Error: %s', err)
