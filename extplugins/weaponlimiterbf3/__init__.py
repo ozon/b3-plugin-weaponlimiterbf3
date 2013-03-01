@@ -77,6 +77,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def onStartup(self):
         """ Initialize plugin settings """
+
         # try to load admin plugin
         self._adminPlugin = self.console.getPlugin('admin')
         if not self._adminPlugin:
@@ -88,7 +89,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         self._wpl_is_active = False
         # register Events
         self.registerEvent(b3.events.EVT_CLIENT_KILL)
-        self.registerEvent(b3.events.EVT_GAME_ROUND_WARMUP)
+        self.registerEvent(b3.events.EVT_GAME_WARMUP)
         self.registerEvent(b3.events.EVT_GAME_ROUND_END)
         self.registerEvent(b3.events.EVT_GAME_MAP_CHANGE)
 
