@@ -118,11 +118,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 elif self._is_forbidden_weapon(weapon):
                     self.debug('%s in pattern detected' % weapon)
                     self._punish_player(self, event)
-                    ##or self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
-                    ##no outout msg## killer.warn('1h', _wmsg, None, None, '')
-                    #self._adminPlugin.warnClient(killer.id, '', True, False, _wmsg, 1)
-                    #if self.kill_killer == 1:
-                    #   kill.
             except IndexError:
                 pass
         # activate wpl if we have a configuration for the current map/gametype
@@ -152,21 +147,6 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                 return True
 
         return False
-
-        # configure limiter per map
-
-    #def _configure_wpl(self):
-    #    """ Load weaponlimiter Configuration per map/gametype """
-    #    _current_map = self.console.game.mapName
-    #    _current_gameType = self.console.game.gameType
-    #    self.debug('Current Map/gameType: %s/%s' % (_current_map, _current_gameType))
-    #
-    #    if _current_map in self._mapconfig and _current_gameType in self._mapconfig[_current_map]['gametype']:
-    #        self.debug('Configure WeaponLimiter for %s/%s' % (_current_map, _current_gameType))
-    #        self.console.say(self.getMessage('weaponlimiter_enabled'))
-    #        self._report_weaponlist()
-    #    else:
-    #        self.debug('No configuration found for %s/%s' % (_current_map, _current_gameType))
 
     # punish player
     def _punish_player(self, event, data=None, client=None):
