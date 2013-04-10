@@ -109,7 +109,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
     def onEvent(self, event):
         """ Handle CLIENT_KILL and GAME_ROUND_START events """
-        if event.type == b3.events.EVT_CLIENT_KILL and self._wpl_is_active:
+        if event.type == b3.events.EVT_CLIENT_KILL and self._wpl_is_active and self.console.game.gameType in self._mapconfig[self.console.game.mapName]['gametype']:
             try:
                 killer = event.client
                 weapon = event.data[1]
@@ -255,6 +255,8 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
                         client.message('WeaponLimiter is allready active.')
                     else:
                         self._wpl_is_active = True
+                        self.console.message(self._messages['weaponlimiter_enabled'])
+                        self._report_weaponlist()
                         self._update_servermessage()
                         #self._configure_wpl()
                 elif data == 'off':
@@ -322,5 +324,3 @@ if __name__ == '__main__':
     superadmin.connects(cid=0)
     superadmin.says('!weaponlimiter')
     superadmin.says('!wpl on')
-
-
