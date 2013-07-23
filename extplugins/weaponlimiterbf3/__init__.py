@@ -24,7 +24,7 @@ from pluginconf import PluginConfig
 from weapondef import WEAPON_NAMES_BY_ID
 from b3.parsers.bf3 import MAP_NAME_BY_ID, GAME_MODES_NAMES, MAP_ID_BY_NAME, GAME_MODES_BY_MAP_ID
 
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 __author__ = 'ozon'
 
 
@@ -43,6 +43,8 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         'anounce_limits_on_first_spawn': True,
         'self_kill_counter': 1,
         'change servermessage': False,
+        'display_extra_msg': 'message',
+        'yell_duration': 10,
     }
     # settings for players punishment
     _punisher_settings = {}
@@ -81,7 +83,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
 
         # Load messages
         for key in self.config.options('messages'):
-            self._messages[key] = self.config.get('messages', key)
+            self._messages[key] = self.config.get('messages', key, True)
 
         self._weaponlimiter_enabled_msg = self.config.get('messages', 'weaponlimiter_enabled')
         self.cmd_weaponlimiter_wlist_text = self.config.get('messages', 'warn_message')
@@ -154,6 +156,7 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         """ Punish player """
         weapon = WEAPON_NAMES_BY_ID[data.data[1]]['name']
         killer = data.client
+        victim = data.target
         if self._punisher_settings['kill_player']:
             try:
                 self.console.write(('admin.killPlayer', killer.name))
@@ -164,6 +167,12 @@ class Weaponlimiterbf3Plugin(b3.plugin.Plugin):
         if self._punisher_settings['warn_player']:
             _wmsg = '%s is forbidden!' % weapon
             self._adminPlugin.warnClient(killer, _wmsg, None, True, '', 0)
+
+        if self._settings['display_extra_msg'] == 'message':
+            killer.message(self._messages['extra_warning_message'] % ({'victim': victim.name, 'weapon': weapon}))
+        elif self._settings['display_extra_msg'] == 'yell':
+            _msg = self._messages['extra_warning_message'] % ({'victim': victim.name, 'weapon': weapon})
+            self.console.write(self.console.getCommand('bigmessage', message=_msg, cid=killer.cid, big_msg_duration=self._settings['yell_duration']))
 
     def _disable_wpl(self):
         """ Disable weaponlimiter activity """
