@@ -1,4 +1,3 @@
-
 WEAPON_NAMES_BY_ID = {
     'AEK-971': {'type': 'assault rifle', 'name': 'AEK-971'},
     'Weapons/AK74M/AK74': {'type': 'assault rifle', 'name': 'AK-74M', 'kit': 'assault'},
@@ -121,4 +120,191 @@ WEAPON_NAMES_BY_ID = {
 WEAPONS_GROUPS = {
     'shotguns': ('870MCS', 'DAO-12', 'jackhammer', 'M1014', 'SPAS-12', 'Siaga20k', 'USAS-12', 'M26Mass'),
     'explosives': ('Weapons/Gadgets/Claymore/Claymore', 'M15 AT Mine', 'Weapons/Gadgets/C4/C4'),
-    }
+}
+
+BF4_WEAPON_NAMES_BY_ID = {
+    # Assault Rifles
+    'U_SCAR-H': {'type': 'assault rifle', 'name': 'SCAR-H', 'kit': 'assault'},
+    'U_AK12': {'type': 'assault rifle', 'name': 'AK-12', 'kit': 'assault'},
+    'U_M416': {'type': 'assault rifle', 'name': 'M416', 'kit': 'assault'},
+    'U_SAR21': {'type': 'assault rifle', 'name': 'SAR-21', 'kit': 'assault'},
+    'U_AEK971': {'type': 'assault rifle', 'name': 'AEK-971', 'kit': 'assault'},
+    'U_FAMAS': {'type': 'assault rifle', 'name': 'FAMAS', 'kit': 'assault'},
+    'U_SteyrAug': {'type': 'assault rifle', 'name': 'AUG A3', 'kit': 'assault'},
+    'U_M16A4': {'type': 'assault rifle', 'name': 'M16A4', 'kit': 'assault'},
+    'U_CZ805': {'type': 'assault rifle', 'name': 'CZ-805', 'kit': 'assault'},
+    'U_GalilACE23': {'type': 'assault rifle', 'name': 'ACE 23', 'kit': 'assault'},
+    'U_QBZ951': {'type': 'assault rifle', 'name': 'QBZ-95-1', 'kit': 'assault'},
+    'U_SCAR-H_M26_Buck': {'type': 'shotgun', 'name': 'SCAR-H M26 Buck', 'kit': 'assault'},
+    'U_SCAR-H_M26_Flechette': {'type': 'shotgun', 'name': 'SCAR-H M26 Flechette', 'kit': 'assault'},
+    'U_SCAR-H_M320_HE': {'type': 'explosive', 'name': 'SCAR-H M320 HE', 'kit': 'assault'},
+    'U_SAR21_M320_HE': {'type': 'explosive', 'name': 'SAR-21 M320 HE', 'kit': 'assault'},
+    'U_SAR21_M320_SMK': {'type': 'smoke', 'name': 'SAR-21 M320 SMK', 'kit': 'assault'},
+    'U_AEK971_M320_HE': {'type': 'ProjectileExplosive', 'name': 'AEK-971', 'kit': 'assault'},
+    'U_AEK971_M320_LVG': {'type': 'ProjectileExplosive', 'name': 'AEK-971', 'kit': 'assault'},
+    'U_AK12_M320_HE': {'type': 'ProjectileExplosive', 'name': 'AK-12', 'kit': 'assault'},
+    'U_M416_M26_Buck': {'type': 'shotgun', 'name': 'M416 M26 Buck', 'kit': 'assault'},
+    'U_M416_M26_Flechette': {'type': 'shotgun', 'name': 'M416 M26 Flechette', 'kit': 'assault'},
+    'U_M416_M26_Slug': {'type': 'shotgun', 'name': 'M416 M26 Slug', 'kit': 'assault'},
+    'U_M416_M320_FLASH': {'type': 'impact', 'name': 'M416 M26 Slug', 'kit': 'assault'},
+    'U_M416_M320_HE': {'type': 'explosive', 'name': 'M416 M320 HE', 'kit': 'assault'},
+    'U_M416_M320_SMK': {'type': '', 'name': 'M416 M320 SMK', 'kit': 'assault'},
+    'U_SteyrAug_M320_HE': {'type': 'explosive', 'name': 'AUG A3 M320 HE', 'kit': 'assault'},
+    'U_SteyrAug_M320_LVG': {'type': 'explosive', 'name': 'AUG A3 M320 LVG', 'kit': 'assault'},
+    'U_QBZ951_M320_HE': {'type': 'explosive', 'name': 'QBZ-95-1 M320 HE', 'kit': 'assault'},
+    'U_M16A4_M320_HE': {'type': 'explosive', 'name': 'M16A4 M320 HE', 'kit': 'assault'},
+
+    # Carbines
+    'U_AK5C': {'type': 'carbines', 'name': 'AK 5C', 'kit': 'general'},
+    'U_ACR': {'type': 'carbines', 'name': 'ACW-R', 'kit': 'general'},
+    'U_SG553LB': {'type': 'carbines', 'name': 'SG553', 'kit': 'general'},
+    'U_AKU12': {'type': 'carbines', 'name': 'AKU-12', 'kit': 'general'},
+    'U_A91': {'type': 'carbines', 'name': 'A-91', 'kit': 'general'},
+    'U_GalilACE52': {'type': 'carbines', 'name': 'ACE 52 CQB', 'kit': 'general'},
+    'U_G36C': {'type': 'carbines', 'name': 'G36C', 'kit': 'general'},
+    'U_M4A1': {'type': 'carbines', 'name': 'M4', 'kit': 'general'},
+    'U_GalilACE': {'type': 'carbines', 'name': 'ACE 21 CQB', 'kit': 'general'},
+    'U_Type95B': {'type': 'carbines', 'name': 'TYPE-95B-1', 'kit': 'general'},
+
+    # Shotguns
+    'U_870': {'type': 'shotgun', 'name': '870 MCS', 'kit': 'general'},
+    'U_M1014': {'type': 'shotgun', 'name': 'M1014', 'kit': 'general'},
+    'U_HAWK': {'type': 'shotgun', 'name': 'HAWK 12G', 'kit': 'general'},
+    'U_SAIGA_20K': {'type': 'shotgun', 'name': 'SAIGA 12K', 'kit': 'general'},
+    'U_SPAS12': {'type': 'shotgun', 'name': 'SPAS-12', 'kit': 'general'},
+    'U_USAS-12': {'type': 'shotgun', 'name': 'UTS 15', 'kit': 'general'},
+    'U_USAS-12_Nightvision': {'type': 'shotgun', 'name': 'UTS 15', 'kit': 'general'},
+    'U_DBV12': {'type': 'shotgun', 'name': 'DBV-12', 'kit': 'general'},
+    'U_QBS09': {'type': 'shotgun', 'name': 'QBS-09', 'kit': 'general'},
+
+    # Light Machine Guns (LMG)
+    'U_Type88': {'type': 'LMG', 'name': 'TYPE 88 LMG', 'kit': 'support'},
+    'U_LSAT': {'type': 'LMG', 'name': 'LSAT', 'kit': 'support'},
+    'U_Pecheneg': {'type': 'LMG', 'name': 'PKP PECHENEG', 'kit': 'support'},
+    'U_QBB95': {'type': 'LMG', 'name': 'QBB-95-1', 'kit': 'support'},
+    'U_M240': {'type': 'LMG', 'name': 'M240B', 'kit': 'support'},
+    'U_MG4': {'type': 'LMG', 'name': 'MG4', 'kit': 'support'},
+    'U_Ultimax': {'type': 'LMG', 'name': 'U-100 MK5', 'kit': 'support'},
+    'U_M249': {'type': 'LMG', 'name': 'M249', 'kit': 'support'},
+    'U_RPK12': {'type': 'LMG', 'name': 'RPK-12', 'kit': 'support'},
+
+    # Personal Defense Weapons (PDW)
+    'U_PP2000': {'type': 'PWD', 'name': 'PP-2000', 'kit': 'general'},
+    'U_UMP45': {'type': 'PWD', 'name': 'UMP-45', 'kit': 'general'},
+    'U_CBJ-MS': {'type': 'PWD', 'name': 'CBJ-MS', 'kit': 'general'},
+    #'': {'type': 'PWD', 'name': 'PDW-R', 'kit': ''},
+    #'': {'type': 'PWD', 'name': 'CZ-3A1', 'kit': ''},
+    #'': {'type': 'PWD', 'name': 'JS2', 'kit': ''},
+    'U_MX4': {'type': 'PWD', 'name': 'MX4', 'kit': 'general'},
+    'U_P90': {'type': 'PWD', 'name': 'P90', 'kit': 'general'},
+    #'': {'type': 'PWD', 'name': 'UMP-9', 'kit': ''},
+
+    # Designated Marksman Rifles
+    'U_MK11': {'type': 'DMR', 'name': 'MK11 MOD 0', 'kit': 'general'},
+    'U_SKS': {'type': 'DMR', 'name': 'SKS', 'kit': 'general'},
+    'U_SVD12': {'type': 'DMR', 'name': 'SVD-12', 'kit': 'general'},
+    'U_QBU88': {'type': 'DMR', 'name': 'QBU-88', 'kit': 'general'},
+    'U_M39EBR': {'type': 'DMR', 'name': 'M39 EMR', 'kit': 'general'},
+    'U_GalilACE53': {'type': 'DMR', 'name': 'ACE 53 SV', 'kit': 'general'},
+    'U_SCAR-HSV': {'type': 'DMR', 'name': 'SCAR-H SV', 'kit': 'general'},
+    'U_RFB': {'type': 'DMR', 'name': 'RFB', 'kit': 'general'},
+
+    'U_M40A5': {'type': 'sniper', 'name': 'M40A5', 'kit': 'recon'},
+    #'': {'type': 'sniper', 'name': 'SCOUT ELITE', 'kit': 'recon'},
+    'U_SV98': {'type': 'sniper', 'name': 'SV-98', 'kit': 'recon'},
+    'U_JNG90': {'type': 'sniper', 'name': 'JNG-90', 'kit': 'recon'},
+    #'': {'type': 'sniper', 'name': 'R338-RECON', 'kit': 'recon'},
+    'U_M98B': {'type': 'sniper', 'name': 'M98B', 'kit': 'recon'},
+    #'': {'type': 'sniper', 'name': 'SRR-61', 'kit': 'recon'},
+    'U_CS-LR4': {'type': 'sniper', 'name': 'CS-LR4', 'kit': 'recon'},
+    'U_FY-JS': {'type': 'sniper', 'name': 'FY-JS', 'kit': 'recon'},
+
+    # Hand Guns
+    'U_M9': {'type': 'handgun', 'name': 'M9', 'kit': 'general'},
+    'U_QSZ92': {'type': 'handgun', 'name': 'QSZ-92', 'kit': 'general'},
+    'U_MP443': {'type': 'handgun', 'name': 'MP443', 'kit': 'general'},
+    'U_SerbuShorty': {'type': 'handgun', 'name': 'SHORTY 12G', 'kit': 'general'},
+    'U_Glock18': {'type': 'handgun', 'name': 'G18', 'kit': 'general'},
+    'U_FN57': {'type': 'handgun', 'name': 'FN57', 'kit': 'general'},
+    'U_M1911': {'type': 'handgun', 'name': 'M1911', 'kit': 'general'},
+    'U_M93R': {'type': 'handgun', 'name': '93R', 'kit': 'general'},
+    'U_CZ75': {'type': 'handgun', 'name': 'CZ-75', 'kit': 'general'},
+    'U_Taurus44': {'type': 'handgun', 'name': '.44 MAGNUM', 'kit': 'general'},
+    'U_HK45C': {'type': 'handgun', 'name': 'COMPACT 45', 'kit': 'general'},
+    'U_P226': {'type': 'handgun', 'name': 'P226', 'kit': 'general'},
+    'U_MP412Rex': {'type': 'handgun', 'name': 'M412 REX', 'kit': 'general'},
+
+    # Hand Grenades
+    'U_V40': {'type': 'grenade', 'name': 'V40 MINI', 'kit': 'general'},
+    'U_Grenade_RGO': {'type': 'grenade', 'name': 'RGO IMPACT', 'kit': 'general'},
+    'U_M34': {'type': 'grenade', 'name': 'M34 INCENDIARY', 'kit': 'general'},
+    #'': {'type': 'smoke', 'name': 'M18 SMOKE', 'kit': 'general'},
+    'U_Flashbang': {'type': 'flash', 'name': 'M84 FLASHBANG', 'kit': 'general'},
+    #'': {'type': None, 'name': 'HAND FLARE', 'kit': 'general'},
+    'U_M67': {'type': 'grenade', 'name': 'M67 FRAG', 'kit': 'general'},
+
+    # Knives
+    #'': {'type': 'melee', 'name': 'BAYONET', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'TRENCH', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'BOWIE', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'SHANK', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'CARBON FIBER', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'SURVIVAL', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'MACHETE', 'kit': 'general'},
+    'U_Scout': {'type': 'melee', 'name': 'Scout', 'kit': 'general'},
+    #'': {'type': 'melee', 'name': 'ACB-90', 'kit': 'general'},
+
+    # Assault Kits
+    'U_PortableMedicpack': {'type': None, 'name': 'FIRST AID PACK', 'kit': 'assault'},
+    'U_Defib': {'type': 'melee', 'name': 'DEFIBRILLATOR', 'kit': 'assault'},
+    'U_M26Mass': {'type': 'shotgun', 'name': 'M26 MASS', 'kit': 'assault'},
+    'U_M320_SMK': {'type': 'smoke', 'name': 'M320 SMK', 'kit': 'assault'},
+    'U_M26Mass_Flechette': {'type': 'shotgun', 'name': 'M26 DART', 'kit': 'assault'},
+    #'': {'type': None, 'name': 'M320 DART', 'kit': 'assault'},
+    'U_M26Mass_Slug': {'type': 'shotgun', 'name': 'M26 SLUG', 'kit': 'assault'},
+    'U_Medkit': {'type': None, 'name': 'MEDIC BAG', 'kit': 'assault'},
+    'U_M26Mass_Frag': {'type': 'shotgun', 'name': 'M26 FRAG', 'kit': 'assault'},
+    #'': {'type': None, 'name': 'M320 FB', 'kit': 'assault'},
+    'U_M320_LVG': {'type': 'explosive', 'name': 'M320 LVG', 'kit': 'assault'},
+
+
+    # Engineer Kits
+    'U_Repairtool': {'type': 'melee', 'name': 'Repair Tool', 'kit': 'engineer'},
+    'U_M15': {'type': 'explosive', 'name': 'M15 AT MINE', 'kit': 'engineer'},
+    'U_FIM92': {'type': 'missile', 'name': 'FIM-92 STINGER', 'kit': 'engineer'},
+    'U_RPG7': {'type': 'missile', 'name': 'RPG-7V2', 'kit': 'engineer'},
+    'U_Sa18IGLA': {'type': 'missile', 'name': 'SA-18 IGLA', 'kit': 'engineer'},
+    'U_SLAM': {'type': 'missile', 'name': 'M2 SLAM', 'kit': 'engineer'},
+    'U_SMAW': {'type': 'missile', 'name': 'MK153 SMAW', 'kit': 'engineer'},
+    'U_FGM148': {'type': 'missile', 'name': 'FGM-148 JAVELIN', 'kit': 'engineer'},
+    'U_SRAW': {'type': 'missile', 'name': 'FGM-172 SRAW', 'kit': 'engineer'},
+
+    # Support Kits
+    #'': {'type': None, 'name': 'AMMO PACK', 'kit': 'support'},
+    'U_Claymore': {'type': 'explosive', 'name': 'M18 Claymore', 'kit': 'support'},
+    #'': {'type': None, 'name': 'AMMO BOX', 'kit': 'support'},
+    'U_XM25': {'type': 'explosive', 'name': 'XM25', 'kit': 'support'},
+    'U_XM25_Smoke': {'type': 'smoke', 'name': 'XM25 SMOKE', 'kit': 'support'},
+    #'': {'type': 'explosive', 'name': 'M224 MORTAR', 'kit': 'support'},
+    #'': {'type': None, 'name': 'MP-APS', 'kit': 'support'},
+    'U_XM25_Flechette': {'type': 'shotgun', 'name': 'XM25 DART', 'kit': 'support'},
+    'U_C4_Support': {'type': 'explosive', 'name': 'C4 Explosive', 'kit': 'support'},
+
+    # Recon Kits
+    #'': {'type': None, 'name': 'PLD', 'kit': 'recon'},
+    #'': {'type': None, 'name': 'MOTION SENSOR', 'kit': 'recon'},
+    #'': {'type': None, 'name': 'RADIO BEACON', 'kit': 'recon'},
+    #'': {'type': None, 'name': 'T-UGS', 'kit': 'recon'},
+    #'': {'type': None, 'name': 'SOFLAM', 'kit': 'recon'},
+    #'': {'type': None, 'name': 'MAV', 'kit': 'recon'},
+    'U_Claymore_Recon': {'type': 'explosive', 'name': 'M18 Claymore', 'kit': 'recon'},
+    'U_C4': {'type': 'explosive', 'name': 'C4 Explosive', 'kit': 'recon'},
+
+    # Misc
+    'Death': {'type': '', 'name': 'Death', 'kit': ''},
+    'Melee': {'type': None, 'name': 'Melee', 'kit': ''},
+    'DamageArea': {'type': None, 'name': 'Suicide', 'kit': ''},
+    'RoadKill': {'type': None, 'name': 'Road Kill', 'kit': ''},
+    'SoldierCollision': {'type': None, 'name': 'Suicide (Collision)', 'kit': ''},
+    'Suicide': {'type': None, 'name': 'Suicide', 'kit': ''},
+}
