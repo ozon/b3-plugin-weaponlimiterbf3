@@ -341,28 +341,3 @@ class Weaponlimiterbf3Plugin(Plugin):
             self.debug('Change servermessage to: %s', _new_servermessage)
         except CommandFailedError, err:
             self.error('Failed to change vars.serverMessage - Error: %s', err)
-
-
-if __name__ == '__main__':
-    from b3.fake import fakeConsole, superadmin, joe, simon
-    import time
-
-    myplugin = Weaponlimiterbf3Plugin(fakeConsole, 'conf/plugin_weaponlimiterbf3.ini')
-    myplugin.console.game.gameName = 'bf3'
-    myplugin.onStartup()
-    time.sleep(2)
-
-    myplugin.console.game.gameType = 'Domination0'
-    myplugin.console.game._mapName = 'XP2_Skybar'
-    superadmin.connects(cid=0)
-    # make joe connect to the fake game server on slot 1
-    joe.connects(cid=1)
-    # make joe connect to the fake game server on slot 2
-    simon.connects(cid=2)
-    # superadmin put joe in group user
-    superadmin.says('!putgroup joe user')
-    superadmin.says('!putgroup simon user')
-
-    superadmin.connects(cid=0)
-    superadmin.says('!weaponlimiter')
-    superadmin.says('!wpl on')
