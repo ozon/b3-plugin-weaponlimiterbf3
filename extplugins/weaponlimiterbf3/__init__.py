@@ -83,9 +83,6 @@ class Weaponlimiterbf3Plugin(Plugin):
         self._plugin_config.load_settings(self._default_settings, 'settings', self._settings)
         self._plugin_config.load_settings(default_settings=self._default_punisher_settings, section='punisher',
                                           to_settings=self._punisher_settings)
-        # load map configuration
-        self._load_mapconfiguration()
-
         # backup servermessage
         if self._settings['change servermessage']:
             try:
@@ -139,6 +136,8 @@ class Weaponlimiterbf3Plugin(Plugin):
             'gametype': list(self.GAME_MODES_NAMES),
             'mode': 'blacklist'
         }
+        # load map configuration
+        self._load_mapconfiguration()
 
     def onEvent(self, event):
         """ Handle CLIENT_KILL and GAME_ROUND_START events """
