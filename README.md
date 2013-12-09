@@ -1,9 +1,10 @@
 ﻿WeaponLimiterBF3 plugin for Big Brother Bot
 ===========================================
 This plugin is for the [B3 Bot](http://www.bigbrotherbot.net/).
-It allows to ban weapons in Battlefield 3.
+It allows to ban weapons in Battlefield 3/4.
 
 ### Features
+- support Battlefield 3 and Battlefield 4
 - Allows to ban weapons per map and gametype
 - penalized players
 
@@ -30,7 +31,6 @@ A detailed description of all the options will be add soon on 1.0 release.
 * ```!weaponlimiter``` (alias !wpl) show the status
 * ```!weaponlimiter <on | off>``` enable/disable the Limiter
 
-If you use whitelist mode, then add 'Death' to the list!
 
 Notes
 -----
@@ -42,7 +42,6 @@ Contributing
 ------------
 * Fork it
 * Test it
-* Visit [our Battlefield3 Server](http://battlelog.battlefield.com/bf3/servers/show/11bdda3f-bb8b-4abb-92de-55f0b3ada7d7/)
 
 Support
 -------
