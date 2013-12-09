@@ -149,6 +149,9 @@ class Weaponlimiterbf3Plugin(Plugin):
                 if killer.name == event.target.name:
                     self.debug('Suicide detected.')
                     return
+                elif weapon in ('Death', 'DamageArea', 'SoldierCollision'):
+                    self.debug('Death by %s detected.' % weapon)
+                    return
                 elif self._is_forbidden_weapon(weapon):
                     self.debug('%s in pattern detected' % weapon)
                     self._punish_player(self, event)
