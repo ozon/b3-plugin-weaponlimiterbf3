@@ -297,7 +297,7 @@ class Weaponlimiterbf3Plugin(Plugin):
                         client.message('WeaponLimiter is allready active.')
                     else:
                         self._wpl_is_active = True
-                        self.console.message(self._messages['weaponlimiter_enabled'])
+                        self.console.say(self._messages['weaponlimiter_enabled'])
                         self._report_weaponlist()
                         self._update_servermessage()
                         #self._configure_wpl()
