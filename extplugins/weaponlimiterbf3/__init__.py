@@ -290,8 +290,8 @@ class Weaponlimiterbf3Plugin(Plugin):
                 else:
                     client.message(self._messages['weaponlimiter_disabled'])
             else:
-                if data not in ('on', 'off', 'pause'):
-                    client.message("Invalid parameter. Expecting one of : 'on', 'off', 'pause'")
+                if data not in ('on', 'off'):
+                    client.message("Invalid parameter. Expecting one of : 'on', 'off'")
                 elif data == 'on':
                     if self._wpl_is_active:
                         client.message('WeaponLimiter is allready active.')
