@@ -282,7 +282,9 @@ class Weaponlimiterbf3Plugin(Plugin):
         return _weaponlist
 
     def cmd_weaponlimiter(self, data, client, cmd=None):
-        """ Handle WeaponLimiter """
+        """\
+        <on|off> manage the WeaponLimiter
+        """
         if client:
             if not data:
                 if self._wpl_is_active:
