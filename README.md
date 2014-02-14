@@ -12,7 +12,7 @@ Usage
 -----
 
 ### Installation
-1. Copy the file [extplugins/weaponlimiterbf3.py](extplugins/weaponlimiterbf3.py) into your `b3/extplugins` folder and
+1. Copy the entire folder [extplugins/weaponlimiterbf3](extplugins/weaponlimiterbf3) into your `b3/extplugins` folder and
 [extplugins/conf/plugin_weaponlimiterbf3.ini](extplugins/conf/plugin_weaponlimiterbf3.ini) into your `b3/conf` folder
 
 2. Add the following line in your b3.xml file (below the other plugin lines)
